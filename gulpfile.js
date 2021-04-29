@@ -1,7 +1,8 @@
 'use strict';
 
 let gulp = require('gulp'),
-    plumber = require('gulp-plumber');
+    plumber = require('gulp-plumber'),
+    sync = require('browser-sync');
 
 // create folder
 gulp.task('create-folder', function CreateFolder() {
@@ -9,7 +10,17 @@ gulp.task('create-folder', function CreateFolder() {
         .pipe(gulp.dest('dist'))
 })
 
+// local server
+gulp.task('serve', function Serve() {
+    sync.init({
+        server: {
+            baseDir: './dist'
+        }
+    })
+})
+
 // commands
 gulp.task('dev', gulp.series(
-    'create-folder'
+    'create-folder',
+    'serve'
 ))
