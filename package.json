@@ -1,0 +1,15 @@
+{
+  "name": "html-layout-gulp",
+  "description": "Source code for creating HTML layouts.",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/artemy-onuchin/html-layout-gulp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/artemy-onuchin/html-layout-gulp/issues"
+  },
+  "homepage": "https://github.com/artemy-onuchin/html-layout-gulp#readme",
+  "author": "Artemy Onuchin",
+  "license": "MIT"
+}
