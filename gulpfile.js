@@ -56,11 +56,18 @@ gulp.task('clear', function Cleaning() {
     return del('dist')
 })
 
+// fonts
+gulp.task('fonts', function Fonts() {
+    return gulp.src('src/fonts/**/*.*')
+    .pipe(gulp.dest('dist/assets/fonts'));
+});
+
 // commands
 gulp.task('dev', gulp.series(
     'clear',
     'create-folder',
     'html',
     'scss',
+    'fonts',
     'serve'
 ))

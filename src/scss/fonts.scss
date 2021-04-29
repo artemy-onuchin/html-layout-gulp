@@ -1,0 +1,36 @@
+// general
+@import './vars';
+
+// sass-lint:disable indentation space-after-colon
+
+// Regular 400
+@font-face {
+    font-family: $font-family;
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/PTsans/Regular.woff') format('woff');
+}
+
+// Regular Italic 400
+@font-face {
+    font-family: $font-family;
+    font-style: italic;
+    font-weight: 400;
+    src: url('../fonts/PTsans/Italic.woff') format('woff');
+}
+
+// Bold 700
+@font-face {
+    font-family: $font-family;
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/PTsans/Bold.woff') format('woff');
+}
+
+// Bold Italic 700
+@font-face {
+    font-family: $font-family;
+    font-style: italic;
+    font-weight: 700;
+    src: url('../fonts/PTsans/BoldItalic.woff') format('woff');
+}
