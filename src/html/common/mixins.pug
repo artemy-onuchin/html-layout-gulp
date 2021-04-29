@@ -1,1 +1,9 @@
 //- mixins
+mixin News(title, text, link, link_disable)
+    .news-home__item
+        h3 #{title}
+        p #{text}
+        if link_disable
+            a.news-home__link.news-home__link--disable(href=`${link}`) Read more
+        else
+            a.news-home__link(href=`${link}`, target="_blank") Read more
