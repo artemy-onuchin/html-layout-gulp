@@ -7,7 +7,10 @@ let gulp = require('gulp'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     gcmq = require('gulp-group-css-media-queries'),
-    del = require('del');
+    del = require('del'),
+    babel = require('gulp-babel'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify');
 
 // create folder
 gulp.task('create-folder', function CreateFolder() {
@@ -26,6 +29,7 @@ gulp.task('serve', function Serve() {
     gulp.watch('src/html/**/*.pug', gulp.series('html')).on('change', sync.reload)
     gulp.watch('src/scss/**/*.scss', gulp.series('scss')).on('change', sync.reload)
     gulp.watch('src/public/**/*.*', gulp.series('public-files')).on('change', sync.reload)
+    gulp.watch('src/js/**/*.js', gulp.series('js')).on('change', sync.reload)
 })
 
 // template
@@ -69,12 +73,26 @@ gulp.task('public-files', function Files() {
     .pipe(gulp.dest('dist/'));
 });
 
+// scripts
+gulp.task('js', function Scripts() {
+    return gulp.src([
+        'src/js/console.js',
+        'src/js/test.js'
+    ])
+        .pipe(plumber())
+        .pipe(babel())
+        .pipe(concat('scripts.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/assets/js'))
+})
+
 // commands
 gulp.task('dev', gulp.series(
     'clear',
     'create-folder',
     'html',
     'scss',
+    'js',
     'fonts',
     'public-files',
     'serve'
