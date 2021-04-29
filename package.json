@@ -2,6 +2,9 @@
   "name": "html-layout-gulp",
   "description": "Source code for creating HTML layouts.",
   "private": true,
+  "scripts": {
+    "dev": "gulp dev"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/artemy-onuchin/html-layout-gulp.git"
@@ -11,5 +14,9 @@
   },
   "homepage": "https://github.com/artemy-onuchin/html-layout-gulp#readme",
   "author": "Artemy Onuchin",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-plumber": "^1.2.1"
+  }
 }

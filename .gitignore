@@ -1,2 +1,6 @@
-﻿# files
+﻿# folder
+/node_modules/
+/dist/
+
+# files
 *.ini
