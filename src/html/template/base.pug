@@ -1,0 +1,30 @@
+block vars
+    if !vars
+        - var pageTitle = 'Page title'
+
+doctype html
+html
+    include ../common/head.pug
+    include ../common/mixins.pug
+
+    body
+
+        // START HEADER
+        include ../layout/header.pug
+        // END HEADER
+        |
+        |
+        // START CONTENT
+        nav
+            a(href="index.html") Home
+            |
+            |
+            a(href="about.html") About
+
+        block content
+        // END CONTENT
+        |
+        |
+        // START FOOTER
+        include ../layout/footer.pug
+        // END FOOTER
