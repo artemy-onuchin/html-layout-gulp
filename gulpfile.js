@@ -25,6 +25,7 @@ gulp.task('serve', function Serve() {
 
     gulp.watch('src/html/**/*.pug', gulp.series('html')).on('change', sync.reload)
     gulp.watch('src/scss/**/*.scss', gulp.series('scss')).on('change', sync.reload)
+    gulp.watch('src/public/**/*.*', gulp.series('public-files')).on('change', sync.reload)
 })
 
 // template
@@ -62,6 +63,12 @@ gulp.task('fonts', function Fonts() {
     .pipe(gulp.dest('dist/assets/fonts'));
 });
 
+// public files
+gulp.task('public-files', function Files() {
+    return gulp.src('src/public/**/*.*')
+    .pipe(gulp.dest('dist/'));
+});
+
 // commands
 gulp.task('dev', gulp.series(
     'clear',
@@ -69,5 +76,6 @@ gulp.task('dev', gulp.series(
     'html',
     'scss',
     'fonts',
+    'public-files',
     'serve'
 ))
