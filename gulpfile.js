@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 let gulp = require('gulp'),
     plumber = require('gulp-plumber'),
@@ -12,30 +12,15 @@ let gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
-    cache = require('gulp-cache');
+    cache = require('gulp-cache')
 
-// create folder
+// Create folder ------------------------------------------------------------------------
 gulp.task('create-folder', function CreateFolder() {
     return gulp.src('*.*', { read: false })
         .pipe(gulp.dest('dist'))
 })
 
-// local server
-gulp.task('serve', function Serve() {
-    sync.init({
-        server: {
-            baseDir: './dist'
-        }
-    })
-
-    gulp.watch('src/html/**/*.pug', gulp.series('html')).on('change', sync.reload)
-    gulp.watch('src/scss/**/*.scss', gulp.series('scss')).on('change', sync.reload)
-    gulp.watch('src/public/**/*.*', gulp.series('public-files')).on('change', sync.reload)
-    gulp.watch('src/js/**/*.js', gulp.series('js')).on('change', sync.reload)
-    gulp.watch('src/images/**/*.*', gulp.series('images')).on('change', sync.reload)
-})
-
-// template
+// Template -----------------------------------------------------------------------------
 gulp.task('html', function Template() {
     return gulp.src([
         'src/html/*.pug'
@@ -44,10 +29,10 @@ gulp.task('html', function Template() {
         .pipe(pug({
             pretty: '    '
         }))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest('dist/'))
 })
 
-// styles
+// Style --------------------------------------------------------------------------------
 gulp.task('scss', function Style() {
     return gulp.src([
         'src/scss/*.scss'
@@ -56,27 +41,10 @@ gulp.task('scss', function Style() {
         .pipe(sass({outputStyle:'expanded'}).on('error', sass.logError))
         .pipe(autoprefixer())
         .pipe(gcmq())
-        .pipe(gulp.dest('dist/assets/css'));
+        .pipe(gulp.dest('dist/assets/css'))
 })
 
-// cleaning
-gulp.task('clear', function Cleaning() {
-    return del('dist')
-})
-
-// fonts
-gulp.task('fonts', function Fonts() {
-    return gulp.src('src/fonts/**/*.*')
-    .pipe(gulp.dest('dist/assets/fonts'));
-});
-
-// public files
-gulp.task('public-files', function Files() {
-    return gulp.src('src/public/**/*.*')
-    .pipe(gulp.dest('dist/'));
-});
-
-// scripts
+// Scripts ------------------------------------------------------------------------------
 gulp.task('js', function Scripts() {
     return gulp.src([
         'src/js/console.js',
@@ -89,7 +57,7 @@ gulp.task('js', function Scripts() {
         .pipe(gulp.dest('dist/assets/js'))
 })
 
-// images
+// Images -------------------------------------------------------------------------------
 gulp.task('images', function Images() {
     return gulp.src([
         'src/images/**/*.*'
@@ -97,7 +65,7 @@ gulp.task('images', function Images() {
         .pipe(cache(imagemin([
             imagemin.gifsicle({interlaced: true}),
             imagemin.mozjpeg({quality: 80, progressive: true}),
-            imagemin.optipng({optimizationLevel: 5}),
+            imagemin.optipng({optimizationLevel: 6}),
             imagemin.svgo({
                 plugins: [
                     {removeViewBox: true},
@@ -108,15 +76,48 @@ gulp.task('images', function Images() {
         .pipe(gulp.dest('dist/images'))
 })
 
-// commands
+// Fonts --------------------------------------------------------------------------------
+gulp.task('fonts', function Fonts() {
+    return gulp.src('src/fonts/**/*.*')
+    .pipe(gulp.dest('dist/assets/fonts'))
+})
+
+// Public files -------------------------------------------------------------------------
+gulp.task('public-files', function Files() {
+    return gulp.src('src/public/**/*.*')
+    .pipe(gulp.dest('dist/'))
+})
+
+// Cleaning dist folder -----------------------------------------------------------------
+gulp.task('clear', function Cleaning() {
+    return del('dist')
+})
+
+// Local server -------------------------------------------------------------------------
+gulp.task('serve', function Serve() {
+    sync.init({
+        server: {
+            baseDir: './dist',
+        },
+        open: false
+    })
+
+    gulp.watch('src/html/**/*.pug', gulp.series('html')).on('change', sync.reload)
+    gulp.watch('src/scss/**/*.scss', gulp.series('scss')).on('change', sync.reload)
+    gulp.watch('src/public/**/*.*', gulp.series('public-files')).on('change', sync.reload)
+    gulp.watch('src/js/**/*.js', gulp.series('js')).on('change', sync.reload)
+    gulp.watch('src/images/**/*.*', gulp.series('images')).on('change', sync.reload)
+})
+
+// Development --------------------------------------------------------------------------
 gulp.task('dev', gulp.series(
     'clear',
     'create-folder',
     'html',
     'scss',
     'js',
+    'images',
     'fonts',
     'public-files',
-    'images',
     'serve'
 ))
