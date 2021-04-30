@@ -10,7 +10,9 @@ let gulp = require('gulp'),
     del = require('del'),
     babel = require('gulp-babel'),
     concat = require('gulp-concat'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    imagemin = require('gulp-imagemin'),
+    cache = require('gulp-cache');
 
 // create folder
 gulp.task('create-folder', function CreateFolder() {
@@ -30,6 +32,7 @@ gulp.task('serve', function Serve() {
     gulp.watch('src/scss/**/*.scss', gulp.series('scss')).on('change', sync.reload)
     gulp.watch('src/public/**/*.*', gulp.series('public-files')).on('change', sync.reload)
     gulp.watch('src/js/**/*.js', gulp.series('js')).on('change', sync.reload)
+    gulp.watch('src/images/**/*.*', gulp.series('images')).on('change', sync.reload)
 })
 
 // template
@@ -86,6 +89,25 @@ gulp.task('js', function Scripts() {
         .pipe(gulp.dest('dist/assets/js'))
 })
 
+// images
+gulp.task('images', function Images() {
+    return gulp.src([
+        'src/images/**/*.*'
+    ])
+        .pipe(cache(imagemin([
+            imagemin.gifsicle({interlaced: true}),
+            imagemin.mozjpeg({quality: 80, progressive: true}),
+            imagemin.optipng({optimizationLevel: 5}),
+            imagemin.svgo({
+                plugins: [
+                    {removeViewBox: true},
+                    {cleanupIDs: false}
+                ]
+            })
+        ])))
+        .pipe(gulp.dest('dist/images'))
+})
+
 // commands
 gulp.task('dev', gulp.series(
     'clear',
@@ -95,5 +117,6 @@ gulp.task('dev', gulp.series(
     'js',
     'fonts',
     'public-files',
+    'images',
     'serve'
 ))
