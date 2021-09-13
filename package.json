@@ -3,7 +3,7 @@
   "description": "Source code for creating HTML layouts.",
   "private": true,
   "scripts": {
-    "dev": "gulp dev"
+    "start": "gulp dev"
   },
   "repository": {
     "type": "git",

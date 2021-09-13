@@ -41,7 +41,7 @@ gulp.task('scss', function Style() {
         .pipe(sass({outputStyle:'expanded'}).on('error', sass.logError))
         .pipe(autoprefixer())
         .pipe(gcmq())
-        .pipe(gulp.dest('dist/assets/css'))
+        .pipe(gulp.dest('dist/css'))
 })
 
 // Scripts ------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ gulp.task('js', function Scripts() {
         .pipe(babel())
         .pipe(concat('scripts.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('dist/assets/js'))
+        .pipe(gulp.dest('dist/js'))
 })
 
 // Images -------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ gulp.task('images', function Images() {
 // Fonts --------------------------------------------------------------------------------
 gulp.task('fonts', function Fonts() {
     return gulp.src('src/fonts/**/*.*')
-    .pipe(gulp.dest('dist/assets/fonts'))
+    .pipe(gulp.dest('dist/fonts'))
 })
 
 // Public files -------------------------------------------------------------------------
@@ -99,7 +99,8 @@ gulp.task('serve', function Serve() {
         server: {
             baseDir: './dist',
         },
-        open: false
+        open: false,
+        notify: false
     })
 
     gulp.watch('src/html/**/*.pug', gulp.series('html')).on('change', sync.reload)
