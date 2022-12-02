@@ -16,21 +16,22 @@
   "author": "Artemy Onuchin",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.13.16",
-    "@babel/preset-env": "^7.13.15",
-    "browser-sync": "^2.26.14",
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "browser-sync": "^2.27.10",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0.1",
+    "gulp-autoprefixer": "^8.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-cache": "^1.1.3",
     "gulp-concat": "^2.6.1",
     "gulp-group-css-media-queries": "^1.2.2",
     "gulp-imagemin": "^7.1.0",
     "gulp-plumber": "^1.2.1",
-    "gulp-pug": "^4.0.1",
-    "gulp-sass": "^4.1.0",
+    "gulp-pug": "^5.0.0",
+    "gulp-sass": "^5.1.0",
     "gulp-uglify": "^3.0.2",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "sass": "^1.62.0"
   }
 }
